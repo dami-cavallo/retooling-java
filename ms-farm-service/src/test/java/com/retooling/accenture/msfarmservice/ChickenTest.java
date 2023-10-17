@@ -163,6 +163,7 @@ public class ChickenTest {
     public void testPasoDelTiempoGranja1() {
         // se configura el comportamiento de los repositorios.
         when(farmRepository.findById(anyInt())).thenReturn(granja1);
+
         // se llama al metodo.
         chickenEggService.passingTimeChicken(10, 1);
 
@@ -315,7 +316,7 @@ public class ChickenTest {
     }
 
     @Test
-    public void comprarGallinaGranja2(){
+    public void comprarGallinasDesdeseGranja2(){
 
         // Para este caso tengo la granja 2 con 1 gallina y 1 huevo. Se compra 1 gallina y me tiene que quedar la
         // cantidad de gallinas en 2, la cantidad huevos 1 y la capacidad disponible en 87
