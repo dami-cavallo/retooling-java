@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pagina Registro</title>
+    <link rel="stylesheet" href="css/registration.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Registro usuario</h1>
+        <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required="required"/>
+
+            <label for="apellido">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required="required"/>
+
+            <label for="nombre">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Email" required="required"/>
+
+            <label for="nombre">Confirmar Email:</label>
+            <input type="email" id="confirmarEmail" name="email" placeholder="Email" required="required"/>
+
+            <label for="nombre">Contraseña:</label>
+            <input type="password" id="password" name="password" placeholder="Contraseña" required="required" minlength="8"/>
+
+            <label for="nombre">Confirmar Contraseña:</label>
+            <input type="password" id="confirmarPassword" name="password" placeholder="Contraseña" required="required" minlength="8"/>
+
+            <label for="roles">Role</label>
+            <select class="form-control" id="roles" name="roles" required>
+                <option value="">--</option>
+                <option value="1">Admin</option>
+                <option value="2">User</option>
+            </select>
+            
+            <button type="submit" onclick="registration(event)">Registrarse</button>
+        </form>
+    </div>
+    <script src="js/login.js"></script>
+</body>
+</html>

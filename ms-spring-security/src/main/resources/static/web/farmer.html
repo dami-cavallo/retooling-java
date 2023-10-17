@@ -1,0 +1,340 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/farmer.css">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <title>Chicken Service</title>
+</head>
+<body>
+<nav class="sidebar close">
+    <header>
+        <i class='bx bx-chevron-right toggle'></i>
+    </header>
+
+    <div class="menu-bar">
+        <div class="menu">
+
+            <ul class="menu-links">
+                <li class="nav-link" data-section="granjas">
+                    <a href="#">
+                        <i class='bx bx-home-alt icon' ></i>
+                        <span class="text nav-text">Mis Granjas</span>
+                    </a>
+                </li>
+
+                <li class="nav-link" data-section="compras">
+                    <a href="#">
+                        <i class='bx bx-shopping-bag icon'></i>
+                        <span class="text nav-text">Compras</span>
+                    </a>
+                </li>
+
+                <li class="nav-link" data-section="ventas">
+                    <a href="#">
+                        <i class='bx bx-store-alt icon'></i>
+                        <span class="text nav-text">Ventas</span>
+                    </a>
+                </li>
+
+                <li class="nav-link role-menu-item" data-section="configuracion">
+                    <a href="#">
+                        <i class='bx bx-cog icon'></i>
+                        <span class="text nav-text">Configuración</span>
+                    </a>
+                </li>
+
+                <li class="nav-link" data-section="cuenta">
+                    <a href="#">
+                        <i class='bx bxs-user-account icon'></i>
+                        <span class="text nav-text">Cuenta</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="bottom-content">
+            <li class="">
+                <a href="/logout">
+                    <i class='bx bx-log-out icon' ></i>
+                    <span class="text nav-text">Cerrar Sesión</span>
+                </a>
+            </li>
+        </div>
+    </div>
+</nav>
+
+<section class="home">
+    <div class="text" id="sectionText"></div>
+
+    <div class="top-button-container">
+        <button class="custom-button" id="openAddFarmFormButton">Agregar Granja</button>
+        <button class="custom-button" id="comprarProductosButton">Realizar Compra</button>
+    </div>
+
+    <div class="top-button-container">
+        <button class="custom-button" id="openAddChickenButton">Agregar Gallinas</button>
+        <button class="custom-button" id="openAddEggsButton">Agregar Huevos</button>
+        <button class="custom-button" id="passingTimeButton">Ejecutar Paso del Tiempo</button>
+    </div>
+    
+    <div class="table-container" style="overflow-y:scroll; max-height: 700px;">
+        <table class="custom-table" style="max-height: 100%;" id="farmsTable">
+            <thead>
+            <tr>
+                <th>Identificador Granja</th>
+                <th>Nombre</th>
+                <th>Capacidad</th>
+                <th>Dinero Disponible</th>
+                <th>Cantidad Gallinas</th>
+                <th>Cantidad Huevos</th>
+                <th>Capacidad restante</th>
+                <th>Estado Granja</th>
+                <th>Vender</th>
+            </tr>
+            </thead>
+            <tbody id="myFarms">
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container" style="overflow-y:scroll; max-height: 700px;">
+        <table class="custom-table" style="max-height: 100%;" id="salesTable">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Producto</th>
+                <th>Precio Venta Unitario</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody id="mySales">
+            <!-- Contenido de la tabla de ventas -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-container" style="overflow-y:scroll; max-height: 700px;">
+        <table class="custom-table" style="max-height: 100%;"  id="purchasesTable">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Fecha</th>
+                <th>Producto</th>
+                <th>Precio Compra Unitario</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody id="myPurchases">
+            <!-- Contenido de la tabla de ventas -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="popup" id="tablaEstadosPopup">
+    <div class="popup-content" style="overflow-y:scroll; max-height: 700px;">
+        <span class="close-popup" id="closeTablaEstadosPopup">&times;</span>
+            <div class="text" id="sectionTextEstadosGallinas">Gallinas</div>
+            <div class="form-container" id="tablaEstadosContainer" style="overflow-y:scroll; max-height: 700px;">
+                <table class="custom-table" style="max-height: 100%;"  id="tablaEstadoGallinas">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Dias Restantes Vida</th>
+                            <th>Dias Restantes Para Poner Huevos</th>
+                            <th>Cantidad Huevos a Poner</th>
+                        </tr>
+                    </thead>
+                    <tbody id="estadosGallinas">
+                        <!-- Aquí se agregarán las filas de la tabla -->
+                    </tbody>
+                </table>
+            </div>
+    
+            <div class="text" id="sectionTextEstadosHuevos">Huevos</div>
+            <div class="form-container" id="tablaEstadosContainer" style="overflow-y:scroll; max-height: 700px;">
+                <table class="custom-table" style="max-height: 100%;"  id="tablaEstadoHuevos">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Dias Para Convertirse En Gallina</th>
+                        </tr>
+                    </thead>
+                    <tbody id="estadosHuevos">
+                        <!-- Aquí se agregarán las filas de la tabla -->
+                    </tbody>
+                </table>
+            </div>
+    
+        </div>
+    </div>
+
+    <div class="form-container" id="formContainer">
+
+        <form id="configForm">
+            <label for="precioCompraGallina">Precio Compra Gallina:</label>
+            <input type="number" step="0.01" id="precioCompraGallina" name="precioCompraGallina" required min="0.01"><br><br>
+
+            <label for="precioCompraHuevo">Precio Compra Huevo:</label>
+            <input type="number" step="0.01" id="precioCompraHuevo" name="precioCompraHuevo" required min="0.01"><br><br>
+
+            <label for="precioVentaGallina">Precio Venta Gallina:</label>
+            <input type="number" step="0.01" id="precioVentaGallina" name="precioVentaGallina" required min="0.01"><br><br>
+            
+            <label for="precioVentaHuevo">Precio Venta Huevo:</label>
+            <input type="number" step="0.01" id="precioVentaHuevo" name="precioVentaHuevo" required min="0.01"><br><br>
+
+            <label for="diasXHuevos">Cantidad dias para poner huevos:</label>
+            <input type="number" id="diasXHuevos" name="diasXHuevos" required min="1"><br><br>
+
+            <label for="cantHuevosXDias">Cantidad huevos que pone gallina:</label>
+            <input type="number" id="cantHuevosXDias" name="cantHuevosXDias" required min="1"><br><br>
+
+            <label for="cantDiasMuerte">Dias que viven gallinas:</label>
+            <input type="number" id="cantDiasMuerte" name="cantDiasMuerte" required min="1"><br><br>
+
+            <label for="diasHuevosNacen">Cantidad dias huevo se convierte gallina:</label>
+            <input type="number" id="diasHuevosNacen" name="diasHuevosNacen" required min="1"><br><br>
+
+            <button class="custom-button" type="submit" id="botonEditar" onclick="habilitarEdicion()" >Editar</button>
+            <button class="custom-button" type="submit" id="botonGuardar" onclick="postFarmConfig(event)">Guardar</button>
+
+        </form>
+    </div>
+
+</section>
+
+<div class="popup" id="addFarmPopup">
+    <div class="popup-content">
+        <span class="close-popup" id="closeFarmPopup">&times;</span>
+        <div class="form-container" id="addFarmFormContainer">
+            <form id="addFarmForm">
+                <label for="nombreGranja">Nombre Granja:</label>
+                <input type="text" id="nombreGranja" name="nombreGranja" required="required" title="nombre vacio"><br><br>
+
+                <label for="capacidadGranja">Capacidad Granja:</label>
+                <input type="number" id="capacidadGranja" name="capacidadGranja" required min="1"><br><br>
+
+                <label for="dineroDisponible">Dinero Disponible:</label>
+                <input type="number" step="0.01" id="dineroDisponible" name="dineroDisponible" required min="0.01"><br><br>
+
+                <button type="button" id="cerrarFormButton">Cerrar</button>
+                <button type="submit" id="guardarFormButton" onclick="postNewFarm(event)">Guardar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="popup" id="realizarCompraPopup">
+    <div class="popup-content">
+        <span class="close-popup" id="closeCompraPopup">&times;</span>
+        <div class="form-container" id="compraFormContainer">
+            <form id="compraForm">
+
+                <label for="cantidadCompra">Cantidad:</label>
+                <input type="number" id="cantidadCompra" name="cantidadCompra" required min="1"><br><br>
+                
+                <label for="productosCompra">Producto</label>
+                <select class="form-control" id="productosCompra" name="productosCompra" required onchange="actualizarPrecioUnitarioCompra()">
+                    <option value="">--</option>
+                    <option value="Gallinas">Gallinas</option>
+                    <option value="Huevos">Huevos</option>
+                </select>
+
+                <label for="precioUnitarioCompra">Precio Unitario:</label>
+                <input type="text" id="precioUnitarioCompra" name="precioUnitarioCompra" readonly><br><br>
+
+                <label for="precioTotalCompra">Precio Total:</label>
+                <input type="text" id="precioTotalCompra" name="precioTotalCompra" readonly><br><br>
+
+                <button type="button" id="cerrarCompraButton">Cerrar</button>
+                <button type="button" id="ejecutarCompraButton" onclick="realizarCompra(event)">Comprar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="popup" id="realizarVentaPopup">
+    <div class="popup-content">
+        <span class="close-popup" id="closeVentaPopup">&times;</span>
+        <div class="form-container" id="ventaFormContainer">
+            <form id="ventaForm">
+
+                <label for="cantidadVenta">Cantidad:</label>
+                <input type="number" id="cantidadVenta" name="cantidadVenta" required min="1"><br><br>
+                
+                <label for="productosVenta">Producto</label>
+                <select class="form-control" id="productosVenta" name="productosVenta" required onchange="actualizarPrecioUnitarioVenta()">
+                    <option value="">--</option>
+                    <option value="Gallinas">Gallinas</option>
+                    <option value="Huevos">Huevos</option>
+                </select>
+
+                <label for="precioUnitarioVenta">Precio Unitario:</label>
+                <input type="text" id="precioUnitarioVenta" name="precioUnitarioVenta" readonly><br><br>
+
+                <label for="precioTotalVenta">Precio Total:</label>
+                <input type="text" id="precioTotalVenta" name="precioTotalVenta" readonly><br><br>
+
+                <button type="button" id="cerrarVentaButton">Cerrar</button>
+                <button type="button" id="ejecutarVentaButton" onclick="realizarVenta(event)">Vender</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="popup" id="addChickensEggsPopup">
+    <div class="popup-content">
+        <span class="close-popup" id="closeChickenEggsPopup">&times;</span>
+        <div class="form-container" id="addChickensEggsFormContainer">
+            <form id="addChickenEggsForm">
+                <label for="cantidadChickensEggs">Cantidad:</label>
+                <input type="number" id="cantidadChickensEggs" name="cantidadChickensEggs" required min="1"><br><br>
+
+                <label for="granjasDisponibles">Granja</label>
+                <select class="form-control" id="granjasDisponibles" name="granjasDisponibles" required>
+                    <option value="">--</option>
+                </select>
+                
+                <button type="button" id="cerrarChickenFormButton">Cerrar</button>
+                <button type="submit" id="guardarChickenFormButton" onclick="addChickens()">Agregar</button>
+                <button type="submit" id="guardarEggFormButton" onclick="addEggs()">Agregar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="popup" id="passingTimePopUp">
+    <div class="popup-content">
+        <span class="close-popup" id="closePassingTime">&times;</span>
+        <div class="form-container" id="passingTimeFormContainer">
+            <form id="passingTimeForm">
+                <label for="cantidadDiasPassingTime">Cantidad días:</label>
+                <input type="number" id="cantidadDiasPassingTime" name="cantidadDiasPassingTime" required min="1"><br><br>
+                
+                <button type="button" id="cerrarPassingTimeButton">Cerrar</button>
+                <button type="submit" id="ejecutarPassingTimeButton" onclick="passingTime()">Ejecutar</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="js/farmer.js"></script>
+</body>
+</html>
+
+
