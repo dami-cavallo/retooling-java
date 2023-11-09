@@ -1,10 +1,9 @@
 package com.retooling.accenture.msfarmservice.service;
 
-import com.retooling.accenture.msfarmservice.model.Chicken;
-import com.retooling.accenture.msfarmservice.model.Egg;
-import com.retooling.accenture.msfarmservice.model.FarmServiceConfig;
 
-import java.util.List;
+import com.retooling.accenture.msfarmservice.model.FarmServiceConfig;
+import org.springframework.http.ResponseEntity;
+
 
 public interface ChickenEggService {
 
@@ -18,11 +17,11 @@ public interface ChickenEggService {
 
     void passingTimeFarms(int cantidad);
 
-    List<Egg> createEggs(int cantidad, int farmId);
+    ResponseEntity createEggs(int cantidad, int farmId);
 
     FarmServiceConfig getFarmServiceConfig();
 
-    List<Chicken> createChickens(int cantidad, int farmId);
+    ResponseEntity createChickens(int cantidad, int farmId);
 
     FarmServiceConfig createConfig(FarmServiceConfig configFarm);
 

@@ -80,8 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const realizarCompraPopUp = document.getElementById('realizarCompraPopup');
     const cerrarCompraButton = document.getElementById('cerrarCompraButton');
     const ejecutarCompraButton = document.getElementById('comprarProductosButton');
-    
-    
+
+
 
     openAddFarmFormButton.addEventListener("click", function () {
         addFarmPopup.style.display = 'block'; // Mostrar el formulario de agregar granjas
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
         showTable(cerrarChickenFormButton);
         showTable(guardarChickenFormButton);
         showTable(addChickenEggsForm);
-        
+
     });
 
     passingTimeButton.addEventListener("click", function () {
@@ -119,21 +119,21 @@ document.addEventListener("DOMContentLoaded", function () {
         showTable(cerrarChickenFormButton);
         showTable(guardarEggFormButton);
         showTable(addChickenEggsForm);
-        
+
     });
     cerrarChickenFormButton.addEventListener("click", function () {
         addChickensEggsPopup.style.display = 'none'; // Ocultar el formulario de agregar granjas
-        
+
     });
 
     cerrarCompraButton.addEventListener("click", function () {
         realizarCompraPopUp.style.display = 'none'; // Ocultar el formulario de agregar granjas
-        
+
     });
 
     cerrarFormButton.addEventListener("click", function () {
         addFarmPopup.style.display = 'none'; // Ocultar el formulario de agregar granjas
-        
+
     });
 
     cerrarPassingTimeButton.addEventListener("click", function () {
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
         addChickensEggsPopup.style.display = 'none'; // Ocultar el formulario de agregar granjas al hacer clic en la cruz
     });
 
-    
+
 
 
 });
@@ -240,11 +240,11 @@ function actualizarPrecioUnitarioCompra() {
     var precioTotalInput = document.getElementById("precioTotalCompra");
     var cantidadCompra = document.getElementById("cantidadCompra");
     var cantidadCompraNumber = parseInt(cantidadCompra.value);
-    
+
     // Obtener los valores numéricos de los elementos de precioVentaUnitario y precioCompraUnitario
     var precioVentaUnitarioGallinaNumber = parseFloat(precioVentaUnitarioGallina.value);
     var precioVentaUnitarioHuevoNumber = parseFloat(precioVentaUnitarioHuevo.value);
-    
+
 
     switch (productoSeleccionadoValue) {
         case "Gallinas":
@@ -269,19 +269,19 @@ function actualizarPrecioUnitarioVenta() {
     var precioTotalInput = document.getElementById("precioTotalVenta");
     var cantidadVenta = document.getElementById("cantidadVenta");
     var cantidadVentaNumber = parseInt(cantidadVenta.value);
-    
-    
+
+
     var precioCompraUnitarioGallinaNumber = parseFloat(precioCompraUnitarioGallina.value);
     var precioCompraUnitarioHuevoNumber = parseFloat(precioCompraUnitarioHuevo.value);
 
     switch (productoSeleccionadoValor) {
         case "Gallinas":
-            precioUnitarioInput.value = precioCompraUnitarioGallinaNumber; 
-            precioTotalInput.value = cantidadVentaNumber * precioCompraUnitarioGallinaNumber; 
+            precioUnitarioInput.value = precioCompraUnitarioGallinaNumber;
+            precioTotalInput.value = cantidadVentaNumber * precioCompraUnitarioGallinaNumber;
             break;
         case "Huevos":
-            precioUnitarioInput.value = precioCompraUnitarioHuevoNumber; 
-            precioTotalInput.value = cantidadVentaNumber * precioCompraUnitarioHuevoNumber; 
+            precioUnitarioInput.value = precioCompraUnitarioHuevoNumber;
+            precioTotalInput.value = cantidadVentaNumber * precioCompraUnitarioHuevoNumber;
             break;
         default:
             precioUnitarioInput.value = "";
@@ -318,7 +318,7 @@ function setupSidebar() {
       toggle.addEventListener("click" , () =>{
             sidebar.classList.toggle("close");
     });
-    
+
   }
 
 function cambiarSectionText(text){
@@ -358,7 +358,7 @@ function obtenerUserAuth() {
 
 //Obtener datos Granjas
 function obtenerFarmsUser() {
-   
+
     fetch(urlFarmsUser)
     .then(res => {
         if (!res.ok) {
@@ -381,7 +381,7 @@ function obtenerFarmsUser() {
 
 //Obtener datos Compras
 function obtenerComprasUser() {
-   
+
     fetch(urlComprasUser)
     .then(res => {
         if (!res.ok) {
@@ -404,7 +404,7 @@ function obtenerComprasUser() {
 
 //Obtener datos Ventas
 function obtenerVentasUser() {
-   
+
     fetch(urlVentasUser)
     .then(res => {
         if (!res.ok) {
@@ -426,7 +426,7 @@ function obtenerVentasUser() {
 
 function obtenerEstados(valorFarmId) {
    var urlFarm = 'http://localhost:9100/farm/' + valorFarmId;
-   
+
     fetch(urlFarm)
     .then(res => {
         if (!res.ok) {
@@ -457,12 +457,12 @@ function farmConfigItems(){
               input.classList.add('read-only');
         });
 
-    
+
 }
 
 
 function habilitarEdicion(){
-    
+
         botonEditar.disabled = true;
         botonGuardar.disabled = false;
         const formInputs = document.querySelectorAll('#configForm input');
@@ -470,8 +470,8 @@ function habilitarEdicion(){
                   input.readOnly = false;
                   input.classList.remove('read-only');
             });
-    
-        
+
+
 }
 
 function getFarmConfig() {
@@ -503,12 +503,12 @@ function getFarmConfig() {
 function formatearFecha(fechaTransaccion) {
     const fechaAFormatear = new Date(fechaTransaccion);
     if (!isNaN(fechaAFormatear.getTime())) {
-        const opciones = { 
-            year: 'numeric', 
-            month: '2-digit', 
-            day: '2-digit', 
-            hour: '2-digit', 
-            minute: '2-digit' 
+        const opciones = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
         };
         return fechaAFormatear.toLocaleDateString('es-ES', opciones);
     } else {
@@ -529,7 +529,7 @@ function obtenerValorFarmId(button) {
 
 function postFarmConfig (event) {
 
-    
+
     if(document.getElementById('configForm').checkValidity()){
 
         event.preventDefault();
@@ -541,9 +541,9 @@ function postFarmConfig (event) {
         var cantHuevosXDias = document.getElementById('cantHuevosXDias').value;
         var cantDiasMuerte = document.getElementById('cantDiasMuerte').value;
         var diasHuevosNacen = document.getElementById('diasHuevosNacen').value;
-        
+
         var url = 'http://localhost:9100/createConfig';
-        
+
         var configFarm = {
             purchasePriceChicken: precioCompraGallina,
             purchasePriceEgg: precioCompraHuevo,
@@ -555,7 +555,7 @@ function postFarmConfig (event) {
             eggsDaysToBecomeChicken: diasHuevosNacen
 
         };
-        
+
         fetch(url, {
             method: 'POST',
             headers: {
@@ -567,7 +567,7 @@ function postFarmConfig (event) {
         if (response.status === 201) {
             console.log('config creada');
             farmConfigItems();
-            
+
         } else {
             response.json().then(data => {
                 console.log(data.message)
@@ -588,15 +588,15 @@ function postNewFarm () {
         var nombre = document.getElementById('nombreGranja').value;
         var capacidad = document.getElementById('capacidadGranja').value;
         var dinero = document.getElementById('dineroDisponible').value;
-        
+
         var url = 'http://localhost:9100/createFarm?farmerId=' + userId;
-        
+
         var newFarm = {
             name: nombre,
             capacity: capacidad,
             money: dinero
         };
-        
+
         fetch(url, {
             method: 'POST',
             headers: {
@@ -607,7 +607,7 @@ function postNewFarm () {
         .then(response => {
         if (response.status === 201) {
             console.log('granja creada');
-            
+
         } else {
             response.json().then(data => {
                 console.log(data.message)
@@ -620,7 +620,7 @@ function postNewFarm () {
         });
 
     } else {
-        
+
         document.getElementById('addFarmForm').checkValidity();
     }
 
@@ -635,12 +635,12 @@ function addChickens () {
 
         var cantidad = document.getElementById('cantidadChickensEggs').value;
         var granjaId = document.getElementById('granjasDisponibles').value;
-        
+
 
         var urlAddChickens = 'http://localhost:9100/createChickens'
         var urlConParametro = `${urlAddChickens}?cantidad=${cantidad}&farmId=${granjaId}`;
 
-        
+
         fetch(urlConParametro, {
             method: 'POST',
             headers: {
@@ -648,19 +648,28 @@ function addChickens () {
             }
         })
         .then(response => {
-        if (response.status === 201) {
-            console.log('se agregaron '+ cantidad + ' gallinas');
-            
-        } else {
-            response.json().then(data => {
-                console.log(data.message)
-            });
-        }
-        })
-        .catch(error => {
-            console.error('Error al agregar gallinas: ', error);
+			response.json().then(data => {
+				if (response.status === 200) {
+					console.log('Se agregaron ' + cantidad + ' gallinas');
+                    setTimeout(function() {
+                    alert(data.message);
+                    window.location.reload();
+                    }, 1000);
+
+				} else {
+					console.error('Error al agregar:', data.message);
+                    setTimeout(function() {
+                        alert(data.message);
+                    }, 1000);
+				}
+			});
+
+		})
+		.catch(error => {
+            console.error('Error al agregar gallinas:', error);
             // Otras acciones en caso de error de red u otro error
         });
+
 
     } else {
         document.getElementById('addChickenEggsForm').checkValidity();
@@ -673,12 +682,12 @@ function realizarCompra () {
 
         var cantidad = document.getElementById('cantidadCompra').value;
         var producto = document.getElementById('productosCompra').value;
-        
+
 
         var urlComprarProductos = 'http://localhost:9100/comprarProductos'
         var urlConParametro = `${urlComprarProductos}?cantidad=${cantidad}&farmerId=${userId}&producto=${producto}`;
 
-        
+
         fetch(urlConParametro, {
             method: 'POST',
             headers: {
@@ -710,14 +719,14 @@ function realizarCompra () {
         compraForm.checkValidity();
     }
 
-   
+
 }
 
 function realizarVenta () {
 
     if(document.getElementById('ventaForm').checkValidity()){
 
-        
+
 
         var cantidad = document.getElementById('cantidadVenta').value;
         var producto = document.getElementById('productosVenta').value;
@@ -725,7 +734,7 @@ function realizarVenta () {
         var urlComprarProductos = 'http://localhost:9100/venderProductos'
         var urlConParametro = `${urlComprarProductos}?cantidad=${cantidad}&farmId=${farmIdConst}&producto=${producto}`;
 
-        
+
         fetch(urlConParametro, {
             method: 'POST',
             headers: {
@@ -757,7 +766,7 @@ function realizarVenta () {
         compraForm.checkValidity();
     }
 
-   
+
 }
 
 
@@ -767,12 +776,12 @@ function addEggs () {
 
         var cantidad = document.getElementById('cantidadChickensEggs').value;
         var granjaId = document.getElementById('granjasDisponibles').value;
-        
 
-        var urlAddChickens = 'http://localhost:9100/createEggs'
-        var urlConParametro = `${urlAddChickens}?cantidad=${cantidad}&farmId=${granjaId}`;
 
-        
+        var urlAddEggs = 'http://localhost:9100/createEggs'
+        var urlConParametro = `${urlAddEggs}?cantidad=${cantidad}&farmId=${granjaId}`;
+
+
         fetch(urlConParametro, {
             method: 'POST',
             headers: {
@@ -780,19 +789,26 @@ function addEggs () {
             }
         })
         .then(response => {
-        if (response.status === 201) {
-            console.log('se agregaron '+ cantidad + ' huevos');
-            
-        } else {
             response.json().then(data => {
-                console.log(data.message)
+                if (response.status === 200) {
+                    console.log('Se agregaron ' + cantidad + ' huevos');
+                    setTimeout(function() {
+                    alert(data.message);
+                    window.location.reload();
+                    }, 1000);
+                } else {
+                    console.error('Error al agregar:', data.message);
+                    setTimeout(function() {
+                        alert(data.message);
+                    }, 1000);
+                }
             });
-        }
         })
         .catch(error => {
-            console.error('Error al agregar huevos: ', error);
+            console.error('Error al agregar huevos:', error);
             // Otras acciones en caso de error de red u otro error
         });
+
 
     } else {
         document.getElementById('addChickenEggsForm').checkValidity();
@@ -808,7 +824,7 @@ function passingTime () {
         var urlAddChickens = 'http://localhost:9100/passingTimeFarms'
         var urlConParametro = `${urlAddChickens}?cantidad=${cantidad}`;
 
-        
+
         fetch(urlConParametro, {
             method: 'POST',
             headers: {
@@ -818,7 +834,7 @@ function passingTime () {
         .then(response => {
         if (response.status === 200) {
             console.log('Se avanzaron ' + cantidad + ' dias');
-            
+
         } else {
             response.json().then(data => {
                 console.log(data.message)
@@ -849,7 +865,7 @@ function granjasDisponibles(jsonObj) {
     granjas.forEach(function(granja) {
         var optionElement = document.createElement('option');
         optionElement.value = granja.id;
-        optionElement.textContent = granja.id +' - ' +granja.name;
+        optionElement.textContent = granja.id +' - ' +granja.name + ' - Capacidad Disponible:' + granja.capacidadDisponible;
         options.appendChild(optionElement);
     });
 }
@@ -867,7 +883,7 @@ function tablaFarms(jsonObj) {
 
     for (var i = 0; i < farms.length; i++) {
         var tr = document.createElement('tr');
-        
+
         // Crear y configurar celdas de datos
         var td2 = document.createElement('td');
         td2.textContent = farms[i].id;
@@ -895,14 +911,14 @@ function tablaFarms(jsonObj) {
         mostrarStatusButton.addEventListener('click', function() {
             const tablaEstadosPopup = document.getElementById('tablaEstadosPopup');
             const closeTablaEstadosPopup = document.getElementById('closeTablaEstadosPopup');
-            
+
             // Obtener el valor de la fila actual
             var fila = this.closest('tr');
             var farmId = fila.cells[0].textContent;
-            
+
             obtenerEstados(farmId);
             tablaEstadosPopup.style.display = 'block';
-            
+
             closeTablaEstadosPopup.addEventListener("click", function() {
                 tablaEstadosPopup.style.display = 'none';
             });
@@ -914,7 +930,7 @@ function tablaFarms(jsonObj) {
             const ejecutarVentaButton = document.getElementById('ejecutarVentaButton');
             const ventaForm = document.getElementById('ventaForm');
             const closeVentaPopup = document.getElementById('closeVentaPopup');
-            
+
             // Obtener el valor de la fila actual
             var fila = this.closest('tr');
             farmIdConst = fila.cells[0].textContent;
@@ -937,7 +953,7 @@ function tablaFarms(jsonObj) {
         // Agregar el botón a la celda
         td9.appendChild(mostrarStatusButton);
         td10.appendChild(venderProductosButton);
-        
+
         tr.appendChild(td2);
         tr.appendChild(td3);
         tr.appendChild(td4);
@@ -947,7 +963,7 @@ function tablaFarms(jsonObj) {
         tr.appendChild(td8);
         tr.appendChild(td9);
         tr.appendChild(td10);
-        
+
         myFarms.appendChild(tr);
     }
 }
@@ -980,10 +996,10 @@ function tablaCompras(jsonObj) {
         td6.setAttribute('class', 'col-xs-2 col-md-2');
         var td7 = document.createElement('td');
         td7.setAttribute('class', 'col-xs-1 col-md-1');
-        
+
 
         td2.textContent = compras[i].id;
-        td3.textContent = formatearFecha(compras[i].fecha); 
+        td3.textContent = formatearFecha(compras[i].fecha);
         td4.textContent = compras[i].tipoProducto;
         td5.textContent = compras[i].precioUnitario;
         td6.textContent = compras[i].cantidad;
@@ -1029,7 +1045,7 @@ function tablaVentas(jsonObj) {
         td6.setAttribute('class', 'col-xs-2 col-md-2');
         var td7 = document.createElement('td');
         td7.setAttribute('class', 'col-xs-1 col-md-1');
-        
+
 
         td2.textContent = ventas[i].id;
         td3.textContent = formatearFecha(ventas[i].fecha);
@@ -1080,20 +1096,20 @@ function completarEstados(jsonObj) {
         td4.setAttribute('class', 'col-xs-2 col-md-2');
         var td5 = document.createElement('td');
         td5.setAttribute('class', 'col-xs-1 col-md-1');
-       
-        
+
+
 
         td2.textContent = gallinas[i].id;
         td3.textContent = gallinas[i].remainingDaysToDie;
         td4.textContent = gallinas[i].remainingDaysToPutEggs;
         td5.textContent = gallinas[i].amountEggsToPut;
-       
+
 
         tr.append(td2);
         tr.append(td3);
         tr.append(td4);
         tr.append(td5);
-        
+
 
         tablaEstadosGallinas.append(tr);
 

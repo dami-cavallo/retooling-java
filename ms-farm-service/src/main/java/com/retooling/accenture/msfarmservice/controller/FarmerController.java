@@ -73,13 +73,13 @@ public class FarmerController {
     }
 
     @PostMapping("/createChickens")
-    public List<Chicken> createChickens(@RequestParam int cantidad,@RequestParam int farmId){
+    public ResponseEntity<?> createChickens(@RequestParam int cantidad,@RequestParam int farmId){
         return chickenEggsService.createChickens(cantidad,farmId);
 
     }
 
     @PostMapping("/createEggs")
-    public List<Egg> createEggs(@RequestParam int cantidad,@RequestParam Integer farmId){
+    public ResponseEntity<?> createEggs(@RequestParam int cantidad,@RequestParam Integer farmId){
         return chickenEggsService.createEggs(cantidad,farmId);
     }
 

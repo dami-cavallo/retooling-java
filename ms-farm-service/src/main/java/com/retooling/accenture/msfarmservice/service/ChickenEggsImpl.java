@@ -1,9 +1,11 @@
 package com.retooling.accenture.msfarmservice.service;
 
 
+import com.retooling.accenture.msfarmservice.exception.SinCapacidadDisponibleException;
 import com.retooling.accenture.msfarmservice.model.*;
 import com.retooling.accenture.msfarmservice.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,46 +40,67 @@ public class ChickenEggsImpl implements ChickenEggService {
     }
 
     //metodo para crear las gallinas
-    public List<Chicken> createChickens(int cantidad, int farmId) {
+    public ResponseEntity createChickens(int cantidad, int farmId) {
 
-        List<Chicken> chickensCreated = new ArrayList<>();
+        try {
 
-        Farm farm = farmRepository.findById(farmId);
+            List<Chicken> chickensCreated = new ArrayList<>();
+            Farm farm = farmRepository.findById(farmId);
 
-        for (int i = 0; i < cantidad; i++) {
-            Chicken chicken = new Chicken(farmServiceConfig.getChickensDaysToDie(), farmServiceConfig.getAmountDaysToPutEggs(), farmServiceConfig.getAmountEggsToPut());
-            chicken.setFarm(farm);
-            chickensCreated.add(chicken);
-            chickenRepository.save(chicken);
+            if (farm.getCapacidadDisponible() < cantidad) {
+                throw new SinCapacidadDisponibleException("La granja no tiene capacidad disponible.");
+            }
+
+            for (int i = 0; i < cantidad; i++) {
+                Chicken chicken = new Chicken(farmServiceConfig.getChickensDaysToDie(), farmServiceConfig.getAmountDaysToPutEggs(), farmServiceConfig.getAmountEggsToPut());
+                chicken.setFarm(farm);
+                chickensCreated.add(chicken);
+            }
+
+            chickenRepository.saveAll(chickensCreated);
+            farm.getChickens().addAll(chickensCreated);
+            farm.setCantChickens(farm.getCantChickens() + cantidad);
+            farm.setCapacidadDisponible();
+            farmRepository.save(farm);
+
+            return ResponseEntity.ok().body("Se cargaron las gallinas correctamente");
+
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
 
-        farm.getChickens().addAll(chickensCreated);
-        farm.setCantChickens(farm.getCantChickens() + cantidad);
-        farm.setCapacidadDisponible();
-        farmRepository.save(farm);
 
-        return chickensCreated;
 
     }
 
     //metodo para crear los huevos
-    public List<Egg> createEggs(int cantidad, int farmId) {
+    public ResponseEntity createEggs(int cantidad, int farmId) {
 
-        List<Egg> eggsCreated = new ArrayList<>();
-        Farm farm = farmRepository.findById(farmId);
+        try {
 
-        for (int i = 0; i < cantidad; i++) {
-            Egg egg = new Egg(farmServiceConfig.getEggsDaysToBecomeChicken());
-            egg.setFarm(farm);
-            eggsCreated.add(egg);
-            eggsRepository.save(egg);
+            List<Egg> eggsCreated = new ArrayList<>();
+            Farm farm = farmRepository.findById(farmId);
+
+            if (farm.getCapacidadDisponible() < cantidad) {
+                throw new SinCapacidadDisponibleException("La granja no tiene capacidad disponible.");
+            }
+
+            for (int i = 0; i < cantidad; i++) {
+                Egg egg = new Egg(farmServiceConfig.getEggsDaysToBecomeChicken());
+                egg.setFarm(farm);
+                eggsCreated.add(egg);
+
+            }
+            eggsRepository.saveAll(eggsCreated);
+            farm.getEggs().addAll(eggsCreated);
+            farm.setCantEggs(farm.getCantEggs() + cantidad);
+            farm.setCapacidadDisponible();
+            farmRepository.save(farm);
+
+            return ResponseEntity.ok().body("Se cargaron los huevos correctamente");
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        farm.getEggs().addAll(eggsCreated);
-        farm.setCantEggs(farm.getCantEggs() + cantidad);
-        farm.setCapacidadDisponible();
-        farmRepository.save(farm);
-        return eggsCreated;
-
     }
 
     //metodo para convertir todos los huevos que cumplieron los días para ser gallina

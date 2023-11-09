@@ -80,7 +80,7 @@
         <button class="custom-button" id="openAddEggsButton">Agregar Huevos</button>
         <button class="custom-button" id="passingTimeButton">Ejecutar Paso del Tiempo</button>
     </div>
-    
+
     <div class="table-container" style="overflow-y:scroll; max-height: 700px;">
         <table class="custom-table" style="max-height: 100%;" id="farmsTable">
             <thead>
@@ -138,40 +138,40 @@
     </div>
 
     <div class="popup" id="tablaEstadosPopup">
-    <div class="popup-content" style="overflow-y:scroll; max-height: 700px;">
-        <span class="close-popup" id="closeTablaEstadosPopup">&times;</span>
+        <div class="popup-content" style="overflow-y:scroll; max-height: 700px;">
+            <span class="close-popup" id="closeTablaEstadosPopup">&times;</span>
             <div class="text" id="sectionTextEstadosGallinas">Gallinas</div>
-            <div class="form-container" id="tablaEstadosContainer" style="overflow-y:scroll; max-height: 700px;">
+            <div class="form-container" style="overflow-y:scroll; max-height: 700px;">
                 <table class="custom-table" style="max-height: 100%;"  id="tablaEstadoGallinas">
                     <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Dias Restantes Vida</th>
-                            <th>Dias Restantes Para Poner Huevos</th>
-                            <th>Cantidad Huevos a Poner</th>
-                        </tr>
+                    <tr>
+                        <th>Id</th>
+                        <th>Dias Restantes Vida</th>
+                        <th>Dias Restantes Para Poner Huevos</th>
+                        <th>Cantidad Huevos a Poner</th>
+                    </tr>
                     </thead>
                     <tbody id="estadosGallinas">
-                        <!-- Aquí se agregarán las filas de la tabla -->
+                    <!-- Aquí se agregarán las filas de la tabla -->
                     </tbody>
                 </table>
             </div>
-    
+
             <div class="text" id="sectionTextEstadosHuevos">Huevos</div>
-            <div class="form-container" id="tablaEstadosContainer" style="overflow-y:scroll; max-height: 700px;">
+            <div class="form-container" style="overflow-y:scroll; max-height: 700px;">
                 <table class="custom-table" style="max-height: 100%;"  id="tablaEstadoHuevos">
                     <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Dias Para Convertirse En Gallina</th>
-                        </tr>
+                    <tr>
+                        <th>Id</th>
+                        <th>Dias Para Convertirse En Gallina</th>
+                    </tr>
                     </thead>
                     <tbody id="estadosHuevos">
-                        <!-- Aquí se agregarán las filas de la tabla -->
+                    <!-- Aquí se agregarán las filas de la tabla -->
                     </tbody>
                 </table>
             </div>
-    
+
         </div>
     </div>
 
@@ -186,7 +186,7 @@
 
             <label for="precioVentaGallina">Precio Venta Gallina:</label>
             <input type="number" step="0.01" id="precioVentaGallina" name="precioVentaGallina" required min="0.01"><br><br>
-            
+
             <label for="precioVentaHuevo">Precio Venta Huevo:</label>
             <input type="number" step="0.01" id="precioVentaHuevo" name="precioVentaHuevo" required min="0.01"><br><br>
 
@@ -241,7 +241,7 @@
 
                 <label for="cantidadCompra">Cantidad:</label>
                 <input type="number" id="cantidadCompra" name="cantidadCompra" required min="1"><br><br>
-                
+
                 <label for="productosCompra">Producto</label>
                 <select class="form-control" id="productosCompra" name="productosCompra" required onchange="actualizarPrecioUnitarioCompra()">
                     <option value="">--</option>
@@ -271,7 +271,7 @@
 
                 <label for="cantidadVenta">Cantidad:</label>
                 <input type="number" id="cantidadVenta" name="cantidadVenta" required min="1"><br><br>
-                
+
                 <label for="productosVenta">Producto</label>
                 <select class="form-control" id="productosVenta" name="productosVenta" required onchange="actualizarPrecioUnitarioVenta()">
                     <option value="">--</option>
@@ -305,10 +305,10 @@
                 <select class="form-control" id="granjasDisponibles" name="granjasDisponibles" required>
                     <option value="">--</option>
                 </select>
-                
+
                 <button type="button" id="cerrarChickenFormButton">Cerrar</button>
-                <button type="submit" id="guardarChickenFormButton" onclick="addChickens()">Agregar</button>
-                <button type="submit" id="guardarEggFormButton" onclick="addEggs()">Agregar</button>
+                <button type="button" id="guardarChickenFormButton" onclick="addChickens()">Agregar</button>
+                <button type="button" id="guardarEggFormButton" onclick="addEggs()">Agregar</button>
 
             </form>
         </div>
@@ -322,7 +322,7 @@
             <form id="passingTimeForm">
                 <label for="cantidadDiasPassingTime">Cantidad días:</label>
                 <input type="number" id="cantidadDiasPassingTime" name="cantidadDiasPassingTime" required min="1"><br><br>
-                
+
                 <button type="button" id="cerrarPassingTimeButton">Cerrar</button>
                 <button type="submit" id="ejecutarPassingTimeButton" onclick="passingTime()">Ejecutar</button>
 

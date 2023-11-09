@@ -89,13 +89,13 @@ public class UserController {
     }
 
     @PostMapping(path = "/createChickens")
-    public ResponseEntity<Map<String,Object>> createChickens(@RequestParam int cantidad,@RequestParam int farmId){
-        return new ResponseEntity<>(userService.createChickens(cantidad,farmId), HttpStatus.CREATED);
+    public ResponseEntity<?> createChickens(@RequestParam int cantidad,@RequestParam int farmId){
+        return userService.createChickens(cantidad,farmId);
     }
 
     @PostMapping(path = "/createEggs")
-    public ResponseEntity<Map<String,Object>> createEggs(@RequestParam int cantidad,@RequestParam int farmId){
-        return new ResponseEntity<>(userService.createEggs(cantidad,farmId), HttpStatus.CREATED);
+    public ResponseEntity<?> createEggs(@RequestParam int cantidad,@RequestParam int farmId){
+        return userService.createEggs(cantidad,farmId);
     }
 
     @PostMapping(path = "/passingTimeFarms")

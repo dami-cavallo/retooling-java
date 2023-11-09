@@ -165,25 +165,74 @@ public class UserServiceImpl implements UserService {
 
 
     //servicio de creacion de gallinas en el ms-farm-service
-    public Map<String,Object> createChickens(int cantidad, int farmId){
+    public ResponseEntity<?> createChickens(int cantidad, int farmId){
 
-        if (userDetailsService.isAuth()!= null && userDetailsService.getRole(userDetailsService.isAuth()).matches("ADMIN")){
-            User userAuth = userRepository.findByEmail(userDetailsService.isAuth());
-            return maps("chickens",farmServiceProxy.createChickens(cantidad,farmId));
+        Map<String, String> responseJson = new HashMap<>();
+        String message;
+        try {
+
+            if (userDetailsService.isAuth()!= null && userDetailsService.getRole(userDetailsService.isAuth()).matches("ADMIN")){
+
+                Response response = farmServiceProxy.createChickens(cantidad, farmId);
+                message = response.body().toString();
+
+                if (response.status() == HttpStatus.OK.value()) {
+
+                    responseJson.put("message", message);
+                    return new ResponseEntity<>(responseJson, HttpStatus.OK);
+
+                } else {
+
+                    responseJson.put("message", message);
+                    return new ResponseEntity<>(responseJson, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+            }
+            else
+
+                throw new UsuarioNoAutorizadoException(userDetailsService.isAuth());
+
+
+        } catch (Exception e){
+
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        else
-            throw new UsuarioNoAutorizadoException(userDetailsService.isAuth());
+
     }
 
     //servicio de creacion de huevos en el ms-farm-service
-    public Map<String,Object> createEggs(int cantidad, int farmId){
+    public ResponseEntity<?> createEggs(int cantidad, int farmId){
 
-        if (userDetailsService.isAuth()!= null && userDetailsService.getRole(userDetailsService.isAuth()).matches("ADMIN")){
-            User userAuth = userRepository.findByEmail(userDetailsService.isAuth());
-            return maps("eggs",farmServiceProxy.createEggs(cantidad,farmId));
+        Map<String, String> responseJson = new HashMap<>();
+        String message;
+
+        try {
+
+            if (userDetailsService.isAuth() != null && userDetailsService.getRole(userDetailsService.isAuth()).matches("ADMIN")) {
+
+                Response response = farmServiceProxy.createEggs(cantidad, farmId);
+
+                message = response.body().toString();
+
+                if (response.status() == HttpStatus.OK.value()) {
+
+                    responseJson.put("message", message);
+                    return new ResponseEntity<>(responseJson, HttpStatus.OK);
+
+                } else {
+
+                    responseJson.put("message", message);
+                    return new ResponseEntity<>(responseJson, HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+            } else
+                throw new UsuarioNoAutorizadoException(userDetailsService.isAuth());
+
+        } catch (Exception e){
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        else
-            throw new UsuarioNoAutorizadoException(userDetailsService.isAuth());
+
+
     }
 
 

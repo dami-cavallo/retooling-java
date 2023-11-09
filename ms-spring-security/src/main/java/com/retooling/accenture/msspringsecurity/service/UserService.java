@@ -25,8 +25,8 @@ public interface UserService {
     Map<String, Object> getFarm(int farmId);
     ResponseEntity<FarmServiceConfigDTO> createConfig(FarmServiceConfigDTO farmServiceConfigDTO);
     FarmServiceConfigDTO getFarmServiceConfig();
-    Map<String,Object> createChickens(int cantidad, int farmId);
-    Map<String,Object> createEggs(int cantidad, int farmId);
+    ResponseEntity<?> createChickens(int cantidad, int farmId);
+    ResponseEntity<?> createEggs(int cantidad, int farmId);
     void passingTimeFarms(int cantidad);
     ResponseEntity<FarmDTO> createFarm(FarmDTO farm, int farmerId);
     ResponseEntity<?> comprarProductos(int cantidad, int farmerId, String producto);
