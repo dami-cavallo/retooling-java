@@ -57,7 +57,12 @@ Debemos ingresar la cantidad de dias que queremos avanzar.
 Esta funcion permite avanzar la cantidad de dias para todas las granjas de todos los usuarios.
 
 
+----------------------------------------------------------------------------------------------------
+cambios 15/11
 
+-se modifica la forma en que se compra y vende. Ahora los ADMIN solamente van a poder vender a precio de venta y cargar el inventario en las granjas. El USER va a poder realizar compras/ventas. El precio compra venta lo define los ADMIN en la configuracion.
+-ahora se debe pasar, al momento de realizar la compra y venta, el id de la granja a quien se le va a vender o comprar.
+-se agregaron validaciones correspondientes.
 
 
 
