@@ -29,7 +29,7 @@ public interface UserService {
     ResponseEntity<?> createEggs(int cantidad, int farmId);
     void passingTimeFarms(int cantidad);
     ResponseEntity<FarmDTO> createFarm(FarmDTO farm, int farmerId);
-    ResponseEntity<?> comprarProductos(int cantidad, int farmerId, String producto);
-    ResponseEntity<?> venderProductos(int cantidad, int farmId, String producto);
+    ResponseEntity<?> comprarProductos(int cantidad, int farmerId, String producto, int granjaOrigen);
+    ResponseEntity<?> venderProductos(int cantidad, int farmId, String producto, int granjaDestino);
     Map<String, Object> getHistorial(String tipoOperacion,int userId);
 }

@@ -114,14 +114,14 @@ public class UserController {
     }
 
     @PostMapping(path = "/comprarProductos")
-    public ResponseEntity<?> comprarProductos(@RequestParam int cantidad,@RequestParam int farmerId, @RequestParam String producto){
-        return userService.comprarProductos(cantidad,farmerId,producto);
+    public ResponseEntity<?> comprarProductos(@RequestParam int cantidad,@RequestParam int farmerId, @RequestParam String producto, @RequestParam int idGranjaOrigen){
+        return userService.comprarProductos(cantidad,farmerId,producto,idGranjaOrigen);
     }
 
     @PostMapping(path = "/venderProductos")
-    public ResponseEntity<?> venderProductos(@RequestParam int cantidad, @RequestParam int farmId, @RequestParam String producto){
+    public ResponseEntity<?> venderProductos(@RequestParam int cantidad, @RequestParam int farmId, @RequestParam String producto, @RequestParam int idGranjaDestino){
 
-        return userService.venderProductos(cantidad,farmId,producto);
+        return userService.venderProductos(cantidad,farmId,producto, idGranjaDestino);
 
     }
 

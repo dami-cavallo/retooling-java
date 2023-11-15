@@ -17,6 +17,7 @@ import static org.mockito.Mockito.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -289,10 +290,15 @@ public class ChickenTest {
 
         //el dinero de la granja 2 quedaria en 9030 y el de la granja 1 9970
 
-        when(farmRepository.findById(anyInt())).thenReturn(granja2);
+        when(farmRepository.findById(eq(2))).thenReturn(granja2);
+        when(farmerRepository.findRoleByFarmerId(anyInt())).thenReturn("USER");
         when(compraVentaService.obtenerGallinasVenta(anyInt(),anyInt())).thenReturn(listaGallinasGranja2);
-        when(farmRepository.findFarmFromAdmin(anyInt(),anyDouble())).thenReturn(granja1);
-        compraVentaService.vender(1,2,"Gallinas");
+        when(farmRepository.findById(eq(1))).thenReturn(granja1);
+        when(farmRepository.findFarmDestinoVenta(anyInt(),anyDouble(),anyInt())).thenReturn(granja1);
+        compraVentaService.vender(1,2,"Gallinas",1);
+
+
+
 
 
         int cantidadGallinasGranja2 = granja2.getCantChickens();
@@ -331,11 +337,11 @@ public class ChickenTest {
         farmer2.setFarms(listaGranjasFarmer2);
 
         when(farmerRepository.findByUserId(anyInt())).thenReturn(farmer2);
-        when(compraVentaService.obtenerGallinasCompra(anyInt())).thenReturn(listaGallinasGranja1.subList(0,1));
+        when(compraVentaService.obtenerGallinasCompra(anyInt(),anyInt())).thenReturn(listaGallinasGranja1.subList(0,1));
         when(farmRepository.findById(anyInt())).thenReturn(granja1);
 
 
-        compraVentaService.comprar(1,2,"Gallinas");
+        compraVentaService.comprar(1,2,"Gallinas",1);
 
 
         int cantidadGallinasGranja2 = granja2.getCantChickens();

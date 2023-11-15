@@ -48,10 +48,10 @@ public interface FarmServiceProxy {
     void passingTimeFarms(@RequestParam int cantidad);
 
     @PostMapping("/ms-farm-service/comprarProductos")
-    Response comprarProductos(@RequestParam int cantidad, @RequestParam int farmerId, @RequestParam String producto);
+    Response comprarProductos(@RequestParam int cantidad, @RequestParam int farmerId, @RequestParam String producto, @RequestParam int idGranjaOrigen);
 
     @PostMapping("/ms-farm-service/venderProductos")
-    Response venderProductos(@RequestParam int cantidad, @RequestParam int farmId, @RequestParam String producto);
+    Response venderProductos(@RequestParam int cantidad, @RequestParam int farmId, @RequestParam String producto, @RequestParam int idGranjaDestino);
 
     @GetMapping("/ms-farm-service/historial/{tipoOperacion}/{userId}")
     Object getHistorialTransaccion(@PathVariable String tipoOperacion, @PathVariable("userId") int userId);

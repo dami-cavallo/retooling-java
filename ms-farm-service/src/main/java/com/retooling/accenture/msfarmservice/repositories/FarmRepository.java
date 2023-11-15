@@ -12,13 +12,10 @@ public interface FarmRepository extends JpaRepository<Farm, Integer> {
     List<Farm> findByFarmerUserId(int id);
 
     @Query(value = "select * from farms f " +
-            "inner join users u on f.fk_farmer = u.id " +
-            "inner join roles r on u.fk_role_id = r.role_id " +
-            "where r.role_name IN ('ADMIN') " +
-            "AND f.capacidad_disponible >= :cantidad AND f.money >= :money " +
-            "order by f.capacidad_disponible DESC " +
-            "LIMIT 1", nativeQuery = true)
-    Farm findFarmFromAdmin(@Param("cantidad") int cantidad, @Param("money") double money);
+            "where f.id = :idGranjaDestino " +
+            "AND f.capacidad_disponible >= :cantidad " +
+            "AND f.money >= :money ", nativeQuery = true)
+    Farm findFarmDestinoVenta(@Param("cantidad") int cantidad, @Param("money") double money, @Param("idGranjaDestino") int idGranjaDestino);
 
 
 }

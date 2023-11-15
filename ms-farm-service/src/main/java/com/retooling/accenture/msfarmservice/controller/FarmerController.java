@@ -83,15 +83,14 @@ public class FarmerController {
         return chickenEggsService.createEggs(cantidad,farmId);
     }
 
-
     @PostMapping(path = "/comprarProductos")
-    public ResponseEntity<?> comprar(@RequestParam int cantidad,@RequestParam int farmerId,@RequestParam String producto){
-        return compraVentaService.comprar(cantidad,farmerId,producto);
+    public ResponseEntity<?> comprar(@RequestParam int cantidad,@RequestParam int farmerId,@RequestParam String producto, @RequestParam int idGranjaOrigen){
+        return compraVentaService.comprar(cantidad,farmerId,producto,idGranjaOrigen);
     }
 
     @PostMapping(path = "/venderProductos")
-    public ResponseEntity<?> vender(@RequestParam int cantidad, @RequestParam int farmId, @RequestParam String producto){
-        return compraVentaService.vender(cantidad,farmId,producto);
+    public ResponseEntity<?> vender(@RequestParam int cantidad, @RequestParam int farmId, @RequestParam String producto, @RequestParam int idGranjaDestino){
+        return compraVentaService.vender(cantidad,farmId,producto,idGranjaDestino);
 
     }
 

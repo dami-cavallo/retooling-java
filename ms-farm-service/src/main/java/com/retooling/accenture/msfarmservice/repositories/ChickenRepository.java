@@ -12,13 +12,10 @@ public interface ChickenRepository extends JpaRepository<Chicken,Integer> {
     List<Chicken> findByFarmId(int id);
 
     @Query(value = "select * from chickens c " +
-            "inner join farms f on c.fk_farm = f.id " +
-            "inner join users u on f.fk_farmer = u.id " +
-            "inner join roles r on u.fk_role_id = r.role_id " +
-            "where r.role_name IN ('ADMIN') " +
+            "where c.fk_farm = :granjaOrigen " +
             "order by c.remaining_days_to_die ASC " +
             "LIMIT :cant", nativeQuery = true)
-    List<Chicken> findCantChickensFromAdmin(@Param("cant") int cant);
+    List<Chicken> findByFarmIdCantChickens(@Param("cant") int cant, @Param("granjaOrigen") int granjaOrigen);
 
     @Query(value = "select * from chickens c " +
             "where c.fk_farm = :farmId " +

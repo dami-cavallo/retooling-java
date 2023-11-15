@@ -270,9 +270,14 @@ function actualizarPrecioUnitarioVenta() {
     var cantidadVenta = document.getElementById("cantidadVenta");
     var cantidadVentaNumber = parseInt(cantidadVenta.value);
 
-
-    var precioCompraUnitarioGallinaNumber = parseFloat(precioCompraUnitarioGallina.value);
-    var precioCompraUnitarioHuevoNumber = parseFloat(precioCompraUnitarioHuevo.value);
+    if (userRole !== "ADMIN") {
+        var precioCompraUnitarioGallinaNumber = parseFloat(precioCompraUnitarioGallina.value);
+        var precioCompraUnitarioHuevoNumber = parseFloat(precioCompraUnitarioHuevo.value);
+    } else {
+        var precioCompraUnitarioGallinaNumber = parseFloat(precioVentaUnitarioGallina.value);
+        var precioCompraUnitarioHuevoNumber = parseFloat(precioVentaUnitarioHuevo.value);
+    }
+    
 
     switch (productoSeleccionadoValor) {
         case "Gallinas":
@@ -344,6 +349,8 @@ function obtenerUserAuth() {
         cambiarSectionText('Bienvenido!' +' '+ userFirstName + ' ' +userLastName);
         if (userRole !== "ADMIN") {
             configMenu.style.display = 'none';
+        } else if (userRole !== "USER") {
+            ejecutarCompraButton.style.display = 'none';
         }
         obtenerFarmsUser(urlFarmsUser);
                 })
@@ -678,14 +685,15 @@ function addChickens () {
 
 function realizarCompra () {
 
-    if(compraForm.checkValidity()){
+    if(document.getElementById('compraForm').checkValidity()){
 
         var cantidad = document.getElementById('cantidadCompra').value;
         var producto = document.getElementById('productosCompra').value;
+        var granjaOrigen = document.getElementById('idGranjaOrigen').value;
 
 
         var urlComprarProductos = 'http://localhost:9100/comprarProductos'
-        var urlConParametro = `${urlComprarProductos}?cantidad=${cantidad}&farmerId=${userId}&producto=${producto}`;
+        var urlConParametro = `${urlComprarProductos}?cantidad=${cantidad}&farmerId=${userId}&producto=${producto}&idGranjaOrigen=${granjaOrigen}`;
 
 
         fetch(urlConParametro, {
@@ -697,7 +705,7 @@ function realizarCompra () {
         .then(response => {
             response.json().then(data => {
                 if (response.status === 200) {
-                    console.log('Se compraron ' + cantidad + ' ' + producto);
+                    console.log('Se compraron ' + cantidad + ' ' + producto + ' a la granja con id: ' + granjaOrigen);
                     setTimeout(function() {
                     alert(data.message);
                     window.location.reload();
@@ -716,7 +724,7 @@ function realizarCompra () {
         });
 
     } else {
-        compraForm.checkValidity();
+        document.getElementById('compraForm').checkValidity;
     }
 
 
@@ -730,9 +738,10 @@ function realizarVenta () {
 
         var cantidad = document.getElementById('cantidadVenta').value;
         var producto = document.getElementById('productosVenta').value;
+        var granjaDestino = document.getElementById('idGranjaDestino').value;
 
         var urlComprarProductos = 'http://localhost:9100/venderProductos'
-        var urlConParametro = `${urlComprarProductos}?cantidad=${cantidad}&farmId=${farmIdConst}&producto=${producto}`;
+        var urlConParametro = `${urlComprarProductos}?cantidad=${cantidad}&farmId=${farmIdConst}&producto=${producto}&idGranjaDestino=${granjaDestino}`;
 
 
         fetch(urlConParametro, {
@@ -744,7 +753,7 @@ function realizarVenta () {
         .then(response => {
             response.json().then(data => {
                 if (response.status === 200) {
-                    console.log('Se vendieron ' + cantidad + ' ' + producto);
+                    console.log('Se vendieron ' + cantidad + ' ' + producto + ' a la granja con id: ' + granjaDestino);
                     setTimeout(function() {
                     alert(data.message);
                     window.location.reload();

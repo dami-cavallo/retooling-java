@@ -248,13 +248,13 @@ public class UserServiceImpl implements UserService {
     }
 
     //servicio de compra del ms-farm-service
-    public ResponseEntity<?> comprarProductos(int cantidad, int farmerId, String producto){
+    public ResponseEntity<?> comprarProductos(int cantidad, int farmerId, String producto, int granjaOrigen){
         Map<String, String> responseJson = new HashMap<>();
         String message;
 
         try {
 
-            Response response = farmServiceProxy.comprarProductos(cantidad,farmerId,producto);
+            Response response = farmServiceProxy.comprarProductos(cantidad,farmerId,producto,granjaOrigen);
 
             if (response.status() == HttpStatus.OK.value()){
                 message = response.body().toString();
@@ -273,14 +273,12 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //servicio de venta del ms-farm-service
-
-    public ResponseEntity<?> venderProductos(int cantidad, int farmId, String producto){
+    public ResponseEntity<?> venderProductos(int cantidad, int farmId, String producto, int granjaDestino){
 
         Map<String, String> responseJson = new HashMap<>();
         String message;
 
-        try (Response response = farmServiceProxy.venderProductos(cantidad, farmId, producto)) {
+        try (Response response = farmServiceProxy.venderProductos(cantidad, farmId, producto, granjaDestino)) {
             if (response.status() == HttpStatus.OK.value()) {
                 message = response.body().toString();
                 responseJson.put("message", message);
