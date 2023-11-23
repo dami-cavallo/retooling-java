@@ -73,7 +73,7 @@ public class CompraVentaImpl implements CompraVenta {
 
 
     //Metodo para que el usuario con rol "USER" pueda comprar gallinas segun si la granja tiene dinero y capacidad disponible
-    //Genera la transaccion de compra para el usuario y de venta para el id de granja origen que le vende los productos
+    //Genera la transaccion de compra para el usuario y de venta con el ID de granja origen que le vende los productos
     public ResponseEntity comprar(int cantidad, int farmerId,String producto, int idGranjaOrigen) {
 
         Farmer farmerComprador= farmerRepository.findByUserId(farmerId);

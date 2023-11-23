@@ -221,12 +221,45 @@ public class ChickenEggsImpl implements ChickenEggService {
             convertirHuevosEnGallina(farmId);
 
         }
+
+    }
+
+    // En caso de que se supere la capacidad, se elimina la mitad de huevos y gallinas. Se prioriza segun los días
+    // restantes de vida y los días restantes para convertirse en gallina
+    public void discardExcessFarm(Farm farm){
+
+        while (farm.getCapacidadDisponible() <= 0){
+
+            int cantChickensToDiscard = farm.getCantChickens() / 2;
+            int cantEggsToDiscard = farm.getCantEggs() / 2;
+
+            if (cantChickensToDiscard > 0){
+                List<Chicken> chickensToDiscard = chickenRepository.findByFarmIdCantChickens(cantChickensToDiscard,farm.getId());
+                chickenRepository.deleteAll(chickensToDiscard);
+                farm.getChickens().removeAll(chickensToDiscard);
+            }
+
+            if (cantEggsToDiscard > 0){
+                List<Egg> eggsToDiscard = eggsRepository.findCantChickensFromUser(cantEggsToDiscard,farm.getId());
+                eggsRepository.deleteAll(eggsToDiscard);
+                farm.getEggs().removeAll(eggsToDiscard);
+            }
+
+            farm.setCantChickens(farm.getChickens().size());
+            farm.setCantEggs(farm.getEggs().size());
+            farm.setCapacidadDisponible();
+            farmRepository.save(farm);
+
+        }
     }
 
     //metodo para el paso del tiempo de todas las granjas
     public void passingTimeFarms(int cantidad){
         for (Farm farm:farmRepository.findAll()) {
             passingTimeChicken(cantidad,farm.getId());
+            if (farm.getCapacidadDisponible()<=0){
+                discardExcessFarm(farm);
+            }
         }
     }
 
