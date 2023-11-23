@@ -64,7 +64,7 @@ cambios 15/11
 -ahora se debe pasar, al momento de realizar la compra y venta, el id de la granja a quien se le va a vender o comprar.
 -se agregaron validaciones correspondientes.
 
-
+- se modifica el paso del tiempo de las granjas. Cuando pasa una cierta cantidad de días y la granja queda con capacidad disponible negativa, se depura la mitad de gallinas y huevos de la granja priorizando la cantidad de dias de vida de la gallinas y los dias para convertirse en gallina de los huevos.
 
 
 
